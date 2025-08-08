@@ -3,11 +3,11 @@
 <head>
   <title>Status ESP32</title>
   <script type="module">
-    // Import Firebase modules
+    // Import Firebase SDK dari CDN
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-    // Firebase config milikmu
+    // Konfigurasi Firebase (dari kamu)
     const firebaseConfig = {
       apiKey: "AIzaSyA0pg47hs6cz-3xXMO1jUDI4VELXBaDvYU",
       authDomain: "coba-81ea9.firebaseapp.com",
@@ -23,15 +23,15 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Ambil status dari database
+    // Ambil data dari path "/device/status"
     const statusRef = ref(db, 'device/status');
     onValue(statusRef, (snapshot) => {
       const status = snapshot.val();
-      document.getElementById("status").textContent = status || "Tidak ada data";
+      document.getElementById("status").innerText = status || "Tidak ada data";
     });
   </script>
 </head>
 <body>
-  <h2>Status ESP32: <span id="status">Loading...</span></h2>
+  <h1>Status ESP32: <span id="status">Loading...</span></h1>
 </body>
 </html>
